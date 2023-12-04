@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabviewSample.MainPage"
+             xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:local="clr-namespace:TabviewSample"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView">
+
+
+    <ContentPage.BindingContext>
+    <local:TabItemsSourceViewModel />
+     </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <tabView:SfTabView ItemsSource="{Binding TabItems}" TabWidthMode="Default"  >
+            <tabView:SfTabView.HeaderItemTemplate>
+                <DataTemplate>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <core:SfBadgeView HorizontalOptions="Center"
+                                          VerticalOptions="Center" 
+                                          BadgeText="20" 
+                                          Grid.Column="1" 
+                                          Margin="0,30,0,0" >
+                            <core:SfBadgeView.Content>
+                                <Label Text="{Binding ID}" 
+                                       WidthRequest="100"  
+                                       HeightRequest="60" 
+                                       Grid.Column="2" />
+                            </core:SfBadgeView.Content>
+                        </core:SfBadgeView>
+                    </Grid>
+                </DataTemplate>
+            </tabView:SfTabView.HeaderItemTemplate>
+            <tabView:SfTabView.ContentItemTemplate>
+                <DataTemplate>
+                    <Grid BackgroundColor="White" x:Name="AllContactsGrid" >
+                        <ListView x:Name="ContactListView" 
+                                  ItemsSource="{Binding TabItems}"
+                                  RowHeight="75">
+                            <ListView.BindingContext>
+                                <local:TabItemsSourceViewModel />
+                            </ListView.BindingContext>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Vertical" Margin="30,0,0,0">
+                                            <Label Text="{Binding ID}"
+                                           FontSize="24" />
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </DataTemplate>
+            </tabView:SfTabView.ContentItemTemplate>
+        </tabView:SfTabView>
+    </ContentPage.Content>
+</ContentPage>
